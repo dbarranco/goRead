@@ -1,26 +1,67 @@
 <html><head>
+    <meta name="keywords" content="goRead,register,Register">
+    <title>Registrarse - goRead</title>
+    <link rel="icon" href="..\..\..\Desktop\goRead\web\img\favicon\favicon.ico">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="estilo.css" rel="stylesheet" type="text/css">
   </head><body>
     <div class="cover">
-      <div class="cover-image" style="background-image : url('http://i.imgur.com/xNUkgsM.jpg')"></div>
+      <div class="cover-image" style="background-image : url('http://i.imgur.com/jyEhhRu.jpg')"></div>
       <div class="container">
         <div class="row">
-          <div class="col-md-15 text-center">
-            <h1>Heading</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisici eli.</p>
+          <div class="col-md-12 text-center">
+            <h1 class="text-inverse">Registro</h1>
+            <p class="text-inverse">Regístrate con tu direccion de correo electrónico</p>
             <br>
             <br>
-            <a class="btn btn-lg btn-default">Click me</a>
+            <div class="text-center text-inverse">
+              <input type="text" class="form-control" placeholder="Correo electronico">
+              <br>
+              <input type="text" class="form-control" placeholder="Confirma tu correo electronico">
+              <br>
+              <input type="password" class="form-control" placeholder="Contraseña">
+              <br>
+              <form>
+                <input type="radio" name="gender">Masculino
+                <input type="radio" name="gender">Femenino
+                <br>
+              </form>
+              <br>
+              <p>Fecha de nacimiento</p>
+              <input type="text" class="form-control" placeholder="Dia">
+              <input type="text" class="form-control" placeholder="Mes">
+              <input type="text" class="form-control" placeholder="Año">
+              <!--<select required="" data-msg-required="¿Cuando naciste?">
+                <option value="" selected="" disabled="">mes</option>
+                <option value="01">Enero</option>
+                <option value="02">Febrero</option>
+                <option value="03">Marzo</option>
+                <option value="04">Abril</option>
+                <option value="05">Mayo</option>
+                <option value="06">Junio</option>
+                <option value="07">Julio</option>
+                <option value="08">Agosto</option>
+                <option value="09">Septiembre</option>
+                <option value="10">Octubre</option>
+                <option value="11">Noviembre</option>
+                <option value="12">Diciembre</option>
+              </select>-->
+              <br>
+              <br>
+              <input type="checkbox">Compartir mis datos con gente a la que no le interese
+              <br>
+              <br>
+              <a class="btn btn-lg btn-warning" href="landing.html">Registro</a>
+            </div>
           </div>
         </div>
       </div>
     </div>
-      <div class="navbar navbar-default navbar-fixed-bottom navbar-inverse">
+    <div class="navbar navbar-default navbar-fixed-bottom navbar-inverse">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
@@ -34,10 +75,10 @@
         <div class="collapse navbar-collapse" id="navbar-ex-collapse">
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <a href="pro.html">Sobre el proyecto</a>
+              <a href="">Sobre el proyecto</a>
             </li>
             <li>
-              <a href="landing.html">Home</a>
+              <a href="landing.html">goRead</a>
             </li>
           </ul>
         </div>
