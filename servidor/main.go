@@ -80,10 +80,6 @@ func handler_buscar(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func handler_leer(w http.ResponseWriter, r *http.Request) {
-
-}
-
 func main() {
 	var err error
 	// MySQL
@@ -102,6 +98,5 @@ func main() {
 	http.HandleFunc("/signup", handler_signup)
 	http.HandleFunc("/lista", handler_lista)
 	http.HandleFunc("/buscar", handler_buscar)
-	http.HandleFunc("/leer", handler_leer)
 	http.ListenAndServe(":80", nil)
 }
