@@ -1,12 +1,12 @@
 CREATE TABLE `Usuario` (
-	`idUsuario` int NOT NULL,
+	`idUsuario` int NOT NULL AUTO_INCREMENT,
 	`email` varchar(100) NOT NULL UNIQUE,
 	`passwd` varchar(40) NOT NULL,
 	PRIMARY KEY (`idUsuario`)
 );
 
 CREATE TABLE `Libros` (
-	`idLibro` int NOT NULL,
+	`idLibro` int NOT NULL AUTO_INCREMENT,
 	`Descripcion` varchar(140) NOT NULL,
 	`Creador` varchar(100) NOT NULL,
 	`Idioma` varchar(20) NOT NULL,
