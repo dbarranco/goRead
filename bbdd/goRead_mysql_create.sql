@@ -1,15 +1,16 @@
 CREATE TABLE `Usuario` (
 	`idUsuario` int NOT NULL,
-	`email` varchar NOT NULL UNIQUE,
+	`email` varchar(100) NOT NULL UNIQUE,
 	`passwd` varchar(40) NOT NULL,
 	PRIMARY KEY (`idUsuario`)
 );
 
 CREATE TABLE `Libros` (
 	`idLibro` int NOT NULL,
-	`DC.Description` char NOT NULL,
-	`DC.Creator` char NOT NULL,
-	`DC.Language` char NOT NULL,
+	`Descripcion` varchar(140) NOT NULL,
+	`Creador` varchar(100) NOT NULL,
+	`Idioma` varchar(20) NOT NULL,
+	`Ano` int NOT NULL,
 	PRIMARY KEY (`idLibro`)
 );
 
