@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="uuid_id" version="2.0">
+    <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+        <dc:identifier opf:scheme="calibre" id="calibre_id">49</dc:identifier>
+        <dc:identifier opf:scheme="uuid" id="uuid_id">ce373647-308f-4083-a3d5-8d5c575f8076</dc:identifier>
+        <dc:title>Juego de tronos</dc:title>
+        <dc:creator opf:file-as="Martin, George R. R." opf:role="aut">George R. R. Martin</dc:creator>
+        <dc:contributor opf:file-as="calibre" opf:role="bkp">calibre (1.46.0) [http://calibre-ebook.com]</dc:contributor>
+        <dc:date>1996-04-13T16:00:00+00:00</dc:date>
+        <dc:description>&lt;p class="description"&gt;Tras el largo verano, el invierno se acerca a los Siete Reinos. Lord Eddars Stark, señor de Invernalia, deja sus dominios para unirse a la corte del rey Robert Baratheon el Usurpador, hombre díscolo y otrora guerrero audaz cuyas mayores aficiones son comer, beber y engendrar bastardos. Eddard Stark desempeñará el cargo de Mano del Rey e intentará desentrañar una maraña de intrigas que pondrá en peligro su vida... y la de los suyos. En un mundo cuyas estaciones duran décadas y en el que retazos de una magia inmemorial y olvidada surgen en los rincones más sombrios y maravillosos, la traición y la lealtad, la compasión y la sed de venganza, el amor y el poder hacen del juego de tronos una poderosa trampa que atrapa en sus fauces a los personajes... y al lector.&lt;/p&gt;</dc:description>
+        <dc:publisher>Gigamesh</dc:publisher>
+        <dc:identifier opf:scheme="ISBN">9788493225049</dc:identifier>
+        <dc:language>spa</dc:language>
+        <dc:subject>Aventuras</dc:subject>
+        <dc:subject>Fantástico</dc:subject>
+        <dc:subject>Bélico</dc:subject>
+        <meta content="{&quot;George R. R. Martin&quot;: &quot;&quot;}" name="calibre:author_link_map"/>
+        <meta content="Canción de Hielo y Fuego" name="calibre:series"/>
+        <meta content="1" name="calibre:series_index"/>
+        <meta content="2014-07-27T13:46:44+00:00" name="calibre:timestamp"/>
+        <meta content="Juego de tronos" name="calibre:title_sort"/>
+        <meta name="calibre:user_metadata:#leido" content="{&quot;is_category&quot;: false, &quot;#extra#&quot;: null, &quot;kind&quot;: &quot;field&quot;, &quot;is_custom&quot;: true, &quot;is_csp&quot;: false, &quot;colnum&quot;: 1, &quot;column&quot;: &quot;value&quot;, &quot;rec_index&quot;: 22, &quot;search_terms&quot;: [&quot;#leido&quot;], &quot;link_column&quot;: &quot;value&quot;, &quot;is_multiple2&quot;: {}, &quot;is_multiple&quot;: null, &quot;datatype&quot;: &quot;bool&quot;, &quot;#value#&quot;: true, &quot;category_sort&quot;: &quot;value&quot;, &quot;table&quot;: &quot;custom_column_1&quot;, &quot;is_editable&quot;: true, &quot;label&quot;: &quot;leido&quot;, &quot;display&quot;: {}, &quot;name&quot;: &quot;Leído&quot;}"/>
+    </metadata>
+    <guide>
+        <reference href="cover.jpg" title="Portada" type="cover"/>
+    </guide>
+</package>
