@@ -16,11 +16,15 @@
             <br>
             <div class="form-group">
               <div class="text-center text-inverse">
-                <input type="text" class="form-control" placeholder="Email">
-                <input type="password" class="form-control" placeholder="Contraseña">
+              <form id="login" method="post">
+                <input type="text" id="email" name="email" class="form-control" placeholder="Email">
+                <input type="password" id="passwd" name="passwd" class="form-control" placeholder="Contraseña">
+                <br>
+                <input class="btn btn-lg btn-warning" type="submit" name="enviar" value="Login">    </input>
+                </form>
               </div>
             </div>
-            <a class="btn btn-lg btn-warning">Login</a>
+            
           </div>
         </div>
       </div>
@@ -48,6 +52,34 @@
         </div>
       </div>
     </div>
-  
+  <script>
+  $('#login')
+  .submit(function(e){
+  	var respuesta = $.ajax({
+  		url: 'http://192.168.1.128:80/signup',
+        type: 'POST',
+        data: new FormData(this),
+        processData: false,
+        contentType: false
+
+  	}).done(function(data){
+  		if(data == "OK"){
+
+  			//Hago lo que sea
+  		}
+  		else{
+
+  			//Hago lo que sea
+  		}
+
+  	}).fail(function(){
+
+  		//Hago lo que sea
+
+  	})
+
+
+  });
+  </script>
 
 </body></html>

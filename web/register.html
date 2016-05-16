@@ -1,4 +1,4 @@
-<html><head>
+﻿<html><head>
     <meta name="keywords" content="goRead,register,Register">
     <title>Registrarse - goRead</title>
     <link rel="icon" href="..\..\..\Desktop\goRead\web\img\favicon\favicon.ico">
@@ -43,7 +43,7 @@
               <input type="checkbox">Compartir mis datos con gente a la que no le interese
               <br>
               <br>
-              <input class="btn btn-lg btn-warning" type="submit" name="enviar"></input>
+              <input class="btn btn-lg btn-warning" type="submit" name="enviar" value="Registro"></input>
               </form>
                 <div class="alert alert-dismissable alert-success" id="alertaOK" style="display:none;opacity:0;transition:opacity:500ms;">
                 <strong>Registrado!</strong></div>
@@ -132,7 +132,7 @@ $('#registro')
 		var respuesta = $.ajax({
 			url: 'http://192.168.1.128:80/signup',
         	type: 'POST',
-        	data: new FormData( this ),
+        	data: new FormData(this),
         	processData: false,
         	contentType: false
 		}).done(function(data){
