@@ -4,7 +4,7 @@
     <link rel="icon" href="..\..\..\Desktop\goRead\web\img\favicon\favicon.ico">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js></script>
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="estilo.css" rel="stylesheet" type="text/css">
@@ -19,7 +19,8 @@
             <br>
             <br>
             <div class="text-center text-inverse">
-            <form id="registro" method="post" enctype="multipart/form-data">
+
+            <form id="registro" method="post">
               <input type="text" id="email" name="email" class="form-control" placeholder="Correo electronico">
               <br>
               <input type="password"  id="passwd1"class="form-control" placeholder="Contraseña">
@@ -48,9 +49,11 @@
                 <strong>Registrado!</strong></div>
                 </div>
 
-                <div class="alert alert-danger alert-dismissable" id="alertaFAIL" style="display:none;opacity:0;transition:opacity:500ms;">
-               <strong>Fallo al registrar el usuario</strong>El usuario existe o la contraseña esta mal introducida.
+                <div class="alert alert-danger alert-dismissable" id="alertaFAIL"style="display:none;opacity:0;transition:opacity:100000ms;" >
+               <strong>Fallo al registrar el usuario</strong>
+
                <div id="mensajeERROR">
+               
                </div>
                </div>
 
@@ -84,12 +87,12 @@
       </div>
     </div>
   
-<script>
+<!--<script>
 $('#registro')
   .submit(function( e ){
     if ($('#passwd1').val() == $('#passwd').val()){
       var respuesta = $.ajax({
-        url: 'http://192.168.1.10/signup',
+        url: 'http://posttestserver.com/post.php',
         type: 'POST',
         data: new FormData( this ),
         processData: false,
@@ -121,8 +124,38 @@ $('#registro')
 
 
   })
+</script>-->
+<script>
+$('#registro')	
+.submit(function(e){
+	if ($('#passwd1').val() == $('#passwd').val()){
+		var respuesta = $.ajax({
+			url: 'http://192.168.1.128:80/signup',
+        	type: 'POST',
+        	data: new FormData( this ),
+        	processData: false,
+        	contentType: false
+		}).done(function(data){
+			if(data == "OK"){
+				$('#alertaOK').css('display','block')
+          		$('#alertaOK').css('opacity','1')
+			}else{
+				$('#alertaFAIL').css('display','block')
+         		$('#alertaFAIL').css('opacity','1')
+          		$('#mensajeERROR').html(data)
+			}
 
+		}).fail(function(){
+			$('#alertaFAIL').css('display','block')
+         	$('#alertaFAIL').css('opacity','1')
+			
+		})
 
-
+	}else{
+		$('#alertaFAIL').css('display','block')
+        $('#alertaFAIL').css('opacity','1')
+		alert("Los campos de la contraseña no coinciden pixurra")
+	}
+});
 </script>
 </body></html>

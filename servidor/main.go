@@ -60,26 +60,37 @@ func handler_login(w http.ResponseWriter, r *http.Request) {
 }
 
 func handler_signup(w http.ResponseWriter, r *http.Request) {
-	if (len(r.URL.Query()["email"]) == 0) && (len(r.URL.Query()["passwd"]) == 0) {
-		w.WriteHeader(http.StatusBadRequest)
-		buffer := []byte("Parámetros incorrectos: " + r.URL.Query().Encode())
-		log.Println("Parámetros incorrectos: " + r.URL.Query().Encode())
-		w.Write(buffer)
-		return
-	}
-	email := r.URL.Query()["email"][0]
-	passwd := r.URL.Query()["passwd"][0]
+	log.Println("Me llega algo")
+	var contenido int64
+	err := r.ParseMultipartForm(contenido)
 
-	res, err := db.Exec("INSERT INTO Usuario (email, passwd) VALUES(?,?)", email, passwd)
-	log.Println("Resultado consulta: ", res)
 	if err != nil {
-		log.Println("Error al crear usuario: ", err)
-		w.WriteHeader(http.StatusBadRequest)
-		buffer := []byte(err.Error())
-		w.Write(buffer)
+		fmt.Println("error != nil")
 	}
-	buffer := []byte("OK")
-	w.Write(buffer)
+	fmt.Println(r.Form) //Te imprime el map
+
+	/*
+		if (len(r.URL.Query()["email"]) == 0) && (len(r.URL.Query()["passwd"]) == 0) {
+			w.WriteHeader(http.StatusBadRequest)
+			buffer := []byte("Parámetros incorrectos: " + r.URL.Query().Encode())
+			log.Println("Parámetros incorrectos: " + r.URL.Query().Encode())
+			w.Write(buffer)
+			return
+		}
+		email := r.URL.Query()["email"][0]
+		passwd := r.URL.Query()["passwd"][0]
+
+		res, err := db.Exec("INSERT INTO Usuario (email, passwd) VALUES(?,?)", email, passwd)
+		log.Println("Resultado consulta: ", res)
+		if err != nil {
+			log.Println("Error al crear usuario: ", err)
+			w.WriteHeader(http.StatusBadRequest)
+			buffer := []byte(err.Error())
+			w.Write(buffer)
+		}
+		buffer := []byte("OK")
+		w.Write(buffer)
+	*/
 }
 
 func handler_lista(w http.ResponseWriter, r *http.Request) {
