@@ -56,25 +56,25 @@
   $('#login')
   .submit(function(e){
   	var respuesta = $.ajax({
-  		url: 'http://192.168.1.128:80/signup',
+  		url: 'http://150.214.182.97/login',
         type: 'POST',
         data: new FormData(this),
         processData: false,
         contentType: false
 
   	}).done(function(data){
-  		if(data == "OK"){
-
-  			//Hago lo que sea
+  		if(data != ""){
+  			localStorage.setItem("token", data);
   		}
   		else{
 
-  			//Hago lo que sea
+  	 alert('Error al iniciar sesión')
+
   		}
 
   	}).fail(function(){
 
-  		//Hago lo que sea
+  	alert('Error al iniciar sesión')
 
   	})
 

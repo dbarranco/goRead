@@ -2,14 +2,30 @@
     <meta name="keywords" content="goread, books, easy">
     <meta name="description" content="goRead my books">
     <title>goRead - Mis Libros</title>
-    <link rel="icon" href="..\..\..\Desktop\goRead\web\img\favicon\favicon.ico">
+    <link rel="icon" href="\img\favicon\favicon.ico">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
+    <script>$(function(){
+    	$.ajax( {
+    			
+				url: 'http://150.214.182.97/lista?token='+localStorage.getItem("token"),
+				type: 'GET',				
+				processData: false,
+				contentType: false
+			}).done(function( data ) {				
+					$('#resultado').html(data);
+				
+			}).fail(function(x, status, error) {
+				$('#resultado').html('<h4>Error: '+status+'</h4><p>'+error+'</p>');				
+			});
+
+    	})</script>
   </head><body style="background-size:cover;background-image:url('http://i.imgur.com/pamp5Ku.jpg') ;">
+
     <div class="code"></div>
     <div class="section">
       <div class="container">
