@@ -1,0 +1,78 @@
+<html><head><link rel="icon" href="img\favicon\favicon.ico"><meta name="keywords" content="books, golang, read, goRead"><meta name="description" content="goRead it's a service about reading books"><title>goRead</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="css" rel="stylesheet" type="text/css">
+  </head><body>
+    <div class="cover">
+      <div class="cover-image" style="background-image : url('http://wdb.ugr.es/~agamizv/wp-content/uploads/BOIELDIEU-F.A.-Robert-Hubert-Architectural-Landscape-with-a-Canal.jpg')"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <h1 class="text-center text-inverse">goRead</h1>
+            <p class="text-center text-inverse">Leer nunca fue tan fácil</p>
+            <br>
+            <div class="form-group">
+              <div class="text-center text-inverse">
+              <form id="login" method="get" action="mislibros.html">
+                <input type="text" id="email" name="email" class="form-control" placeholder="Email">
+                <input type="password" id="passwd" name="passwd" class="form-control" placeholder="Contraseña">
+                <br>
+                <a class="btn btn-lg btn-warning" href="http://150.214.182.20/mislibros.html" type="submit" id="benviar" name="enviar" value="Login">Enviar</a>
+                </form>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navbar navbar-default navbar-fixed-bottom navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/"><img height="20" alt="Brand" src="img\libro3.png"></a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="about.html">Sobre el proyecto</a>
+            </li>
+            <li>
+              <a href="register.html">Registrate</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <script>
+  $('#benviar')
+  .click(function(e){
+  //e.stopPropagation();
+  	var respuesta = $.ajax({
+  		url: '/login?email='+$('#email').val()+'&passwd='+$('#passwd').val(),
+        type: 'GET',
+        processData: false,
+        contentType: false
+  	}).done(function(data){
+  		if(data != ""){
+			window.location="/mislibros.html?token="+data;
+  		}
+  		else{
+			alert('Error al iniciar sesión');
+  		}
+  	}).fail(function(){
+		alert('Error al iniciar sesión');
+  	});
+	return false;
+  });
+  </script>
+
+</body></html>

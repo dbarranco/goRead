@@ -1,0 +1,64 @@
+<html><head><link rel="icon" href="img\favicon\favicon.ico"><meta name="keywords" content="read,golang,book"><meta name="description" content="Read page"><title>goRead - Leer</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="epubjs/build/libs/zip.min.js"></script>
+        <script type="text/javascript" src="epubjs/build/epub.min.js"></script>
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
+		<script>
+			var urlParams;
+			(window.onpopstate = function () {
+				var match,
+					pl     = /\+/g,  // Regex for replacing addition symbol with a space
+					search = /([^&=]+)=?([^&]*)/g,
+					decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+					query  = window.location.search.substring(1);
+
+				urlParams = {};
+				while (match = search.exec(query))
+				   urlParams[decode(match[1])] = decode(match[2]);
+			})();
+		</script>
+    </head><body style="background-color: rgba(128,80,20,0.4);">
+        <div class="navbar navbar-default navbar-fixed-bottom navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand"><img height="20" alt="Brand" src="img\libro3.png"></a>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a onclick="Book.prevPage();">Anterior</a>
+                        </li>
+                        <li>
+                            <a onclick="Book.nextPage();">Siguiente</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="cover" style="min-height:76%;max-height: 92%;background-color: rgba(128,80,20,0.2);">
+            <div class="cover-image" style="background-image : url('http://www.publicdomainpictures.net/download-picture.php?adresar=70000&soubor=old-white-background.jpg&id=67622');-webkit-filter: blur(5px);  -moz-filter: blur(5px);  -o-filter: blur(5px);  -ms-filter: blur(5px);  filter: blur(5px);"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div id="area"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            var Book = ePub("/libros/"+urlParams['libro']+".epub");
+            Book.renderTo("area");
+        </script>
+    
+
+</body></html>

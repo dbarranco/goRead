@@ -3,10 +3,9 @@
 	Primitivas:
 		- Login
 		- Sign up
-		- Lista usuario
-		- Lista completa
-		- Búsqueda
-		- Leer (libro, página)
+		- Lista usuario (Mis libros)
+		- Lista completa (Descubre)
+		- Añadir libro a lista de usuario
 */
 package main
 
@@ -30,6 +29,12 @@ func handler_login(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token")
 	w.Header().Set("Access-Control-Allow-Credentials", "true")
+
+	if (len(r.URL.Query()["email"]) == 0) || (len(r.URL.Query()["passwd"]) == 0) {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("Error en la consulta."))
+		return
+	}
 
 	email := r.URL.Query()["email"][0]
 	contra := r.URL.Query()["passwd"][0]
@@ -193,7 +198,6 @@ func handler_descubrir(w http.ResponseWriter, r *http.Request) {
 	}
 	id := mapa[token]
 
-	//id := mapa[id]
 	if id == 0 {
 		w.WriteHeader(http.StatusForbidden)
 		buffer := []byte("Usuario incorrecto: " + r.URL.Query().Encode())
@@ -203,7 +207,7 @@ func handler_descubrir(w http.ResponseWriter, r *http.Request) {
 	}
 
 	log.Println("Usuario ", strconv.Itoa(id), " pide lista de libros.")
-	rows, err := db.Query("SELECT * FROM Libros")
+	rows, err := db.Query("SELECT idLibro, Titulo,Descripcion,Creador,Idioma,Ano FROM Libros")
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		buffer := []byte("Error del servidor: " + err.Error())
@@ -232,8 +236,8 @@ func handler_descubrir(w http.ResponseWriter, r *http.Request) {
 			log.Println("Error del servidor: " + err.Error())
 			return
 		}
-
-		buffer := []byte(fmt.Sprintf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", titulo, creador, ano, idioma, descripcion))
+		car := "+"
+		buffer := []byte(fmt.Sprintf("<tr><td><a class=\"tick\" href=\"/add?libro=%s\">%s</a><a href=\"/finalRead.html?libro=%s\">%s</a></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", car, id, id, titulo, creador, ano, idioma, descripcion))
 		w.Write(buffer)
 	}
 	buffer = []byte("</tbody></table>")
@@ -248,10 +252,90 @@ func handler_descubrir(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func handler_add(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token")
+	w.Header().Set("Access-Control-Allow-Credentials", "true")
+
+	if (len(r.URL.Query()["token"]) == 0) || (len(r.URL.Query()["libro"]) == 0) {
+		w.WriteHeader(http.StatusBadRequest)
+		buffer := []byte("Parámetros incorrectos: " + r.URL.Query().Encode())
+		log.Println("Parámetros incorrectos: " + r.URL.Query().Encode())
+		w.Write(buffer)
+		return
+	}
+	token, err := strconv.Atoi(r.URL.Query()["token"][0])
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		buffer := []byte("Parámetros incorrectos: " + r.URL.Query().Encode())
+		log.Println("Parámetros incorrectos: " + r.URL.Query().Encode())
+		w.Write(buffer)
+		return
+	}
+	libro := r.URL.Query()["libro"][0]
+	id := mapa[token]
+
+	if id == 0 {
+		w.WriteHeader(http.StatusForbidden)
+		buffer := []byte("Usuario incorrecto: " + r.URL.Query().Encode())
+		log.Println("Usuario incorrecto: " + r.URL.Query().Encode())
+		w.Write(buffer)
+		return
+	}
+
+	log.Println("Usuario ", strconv.Itoa(id), " añade libro ", libro, " a su lista.")
+	_, err = db.Exec("INSERT INTO userLibros (idUsuario, idLibro) VALUES('" + strconv.Itoa(id) + "','" + libro + "');")
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		buffer := []byte("Error del servidor: " + err.Error())
+		log.Println("Error del servidor: " + err.Error())
+		w.Write(buffer)
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte("OK"))
+}
+
+func handler_logoff(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token")
+	w.Header().Set("Access-Control-Allow-Credentials", "true")
+
+	if len(r.URL.Query()["token"]) == 0 {
+		w.WriteHeader(http.StatusBadRequest)
+		buffer := []byte("Parámetros incorrectos: " + r.URL.Query().Encode())
+		log.Println("Parámetros incorrectos: " + r.URL.Query().Encode())
+		w.Write(buffer)
+		return
+	}
+	token, err := strconv.Atoi(r.URL.Query()["token"][0])
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		buffer := []byte("Parámetros incorrectos: " + r.URL.Query().Encode())
+		log.Println("Parámetros incorrectos: " + r.URL.Query().Encode())
+		w.Write(buffer)
+		return
+	}
+	id := mapa[token]
+
+	if id == 0 {
+		w.WriteHeader(http.StatusForbidden)
+		buffer := []byte("Usuario incorrecto: " + r.URL.Query().Encode())
+		log.Println("Usuario incorrecto: " + r.URL.Query().Encode())
+		w.Write(buffer)
+		return
+	}
+
+	log.Println("Usuario ", strconv.Itoa(id), " cierra sesión.")
+	delete(mapa, token)
+}
+
 func main() {
 	var err error
 	// MySQL
-	db, err = sql.Open("mysql", "app:app@tcp(150.214.182.97:3306)/goread")
+	db, err = sql.Open("mysql", "app:app@tcp(150.214.182.20:3306)/goread")
 	if err != nil {
 		log.Fatal("Error al conectar a la base de datos: ", err)
 	}
@@ -266,5 +350,7 @@ func main() {
 	http.HandleFunc("/signup", handler_signup)
 	http.HandleFunc("/lista", handler_lista)
 	http.HandleFunc("/descubrir", handler_descubrir)
+	http.HandleFunc("/add", handler_add)
+	http.HandleFunc("/logoff", handler_logoff)
 	http.ListenAndServe(":80", nil)
 }

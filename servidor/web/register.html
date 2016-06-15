@@ -1,0 +1,116 @@
+<html><head>
+        <meta name="keywords" content="goRead,register,Register">
+        <title>Registrarse - goRead</title>
+        <link rel="icon" href="img\favicon\favicon.ico">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="estilo.css" rel="stylesheet" type="text/css">
+    </head><body>
+        <div class="cover">
+            <div class="cover-image" style="background-image : url('http://i.imgur.com/jyEhhRu.jpg')"></div>
+            <div class="container">
+                <div class="row" style="padding-bottom: 3em;">
+                    <div class="col-md-12 text-center">
+                        <h1 class="text-inverse">Registro</h1>
+                        <p class="text-inverse">Regístrate con tu direccion de correo electrónico</p>
+                        <br>
+                        <br>
+                        <div class="text-center text-inverse">
+                            <form id="registro" method="post">
+                                <input type="text" id="email" name="email" class="form-control" placeholder="Correo electronico">
+                                <br>
+                                <input type="password" id="passwd1" class="form-control" placeholder="Contraseña">
+                                <br>
+                                <input type="password" id="passwd" name="passwd" class="form-control" placeholder="Confirma tu contraseña">
+                                <br>
+                                <input type="radio" name="gender">Masculino
+                                <input type="radio" name="gender">Femenino
+                                <br>
+                                <br>
+                                <p>Fecha de nacimiento</p>
+                                <input type="text" class="form-control" placeholder="Dia">
+                                <input type="text" class="form-control" placeholder="Mes">
+                                <input type="text" class="form-control" placeholder="Año">
+                                <br>
+                                <br>
+                                <input type="checkbox">Compartir mis datos con gente a la que no le interese
+                                <br>
+                                <br>
+                                <input class="btn btn-lg btn-warning" type="submit" name="enviar" value="Registro" id="benviar">
+                            </form>
+                            <div class="alert alert-dismissable alert-success" id="alertaOK" style="display:none;opacity:0;transition:opacity 500ms;">
+                                <strong>¡Registrado!</strong>
+                            </div>
+                        </div>
+                        <div class="alert alert-danger alert-dismissable" id="alertaFAIL" style="display:none;opacity:0;transition:opacity 1000ms;">
+                            <strong>Fallo al registrar el usuario</strong>
+                            <div id="mensajeERROR"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navbar navbar-default navbar-fixed-bottom navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/"><img height="20" alt="Brand" src="img\libro3.png"></a>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/about.html">Sobre el proyecto</a>
+                        </li>
+                        <li>
+                            <a href="/">goRead</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script>
+            $('#benviar')	
+            .click(function(e){
+			e.stopPropagation();
+            	if ($('#passwd1').val() == $('#passwd').val()){
+            		var respuesta = $.ajax({
+            			url: '/signup?email='+$('#email').val()+'&passwd='+$('#passwd').val(),
+                    	type: 'GET',
+                    	processData: false,
+                    	contentType: false
+            		}).done(function(data){
+            			if(data == "OK"){
+            				$('#alertaOK').css('display','block');
+                      		$('#alertaOK').css('opacity','1');
+							setInterval(function(){window.location="/";}, 3000);
+            			}else{
+            				$('#alertaFAIL').css('display','block');
+                     		$('#alertaFAIL').css('opacity','1');
+                      		$('#mensajeERROR').html(data);
+            			}
+            
+            		}).fail(function(data){
+            			$('#alertaFAIL').css('display','block');
+                     	$('#alertaFAIL').css('opacity','1');
+						$('#mensajeERROR').html(data);
+            		})
+            
+            	}else{
+            		$('#alertaFAIL').css('display','block');
+                    $('#alertaFAIL').css('opacity','1');
+            		alert("Los campos de la contraseña no coinciden.");
+            	}
+				return false;
+            });
+        </script>
+    
+
+</body></html>

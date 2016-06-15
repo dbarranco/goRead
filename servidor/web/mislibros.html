@@ -1,0 +1,96 @@
+<html><head>
+    <meta name="keywords" content="goread, books, easy">
+    <meta name="description" content="goRead my books">
+    <title>goRead - Mis Libros</title>
+    <link rel="icon" href="\img\favicon\favicon.ico">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
+    <script>
+			(window.onpopstate = function () {
+				var match,
+					pl     = /\+/g,  // Regex for replacing addition symbol with a space
+					search = /([^&=]+)=?([^&]*)/g,
+					decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+					query  = window.location.search.substring(1);
+
+				urlParams = {};
+				while (match = search.exec(query))
+				   urlParams[decode(match[1])] = decode(match[2]);
+			})();
+
+	$(function(){
+    	$.ajax( {
+				url: '/lista?token='+urlParams['token'],
+				type: 'GET',				
+				processData: false,
+				contentType: false
+			}).done(function( data ) {				
+					$('#resultado').html(data);
+				
+			}).fail(function(x, status, error) {
+				$('#resultado').html('<h4>Error: '+status+'</h4><p>'+error+'</p>');
+				setInterval(function(){window.location="/";},3000);
+			});
+	
+		$('#cerrar').click(function(){
+			$.ajax( {URL:'/logoff?token='+urlParams['token']});
+		});
+		$('#adescubre').attr('href',"/descubre.html?token="+urlParams['token']);
+		$('#alibros').attr('href',"/mislibros.html?token="+urlParams['token']);
+    	});</script>
+		<style>
+		#resultado{
+			background: rgba(40,40,40,0.8);
+			border-radius: 10px;
+			min-height: 20em;
+			padding: 4em;
+			color: white;
+		}
+		.table{color: white;}
+		</style>
+  </head><body style="background-size:cover;background-image:url('http://i.imgur.com/pamp5Ku.jpg') ;">
+
+    <div class="code"></div>
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div id="resultado"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navbar navbar-default navbar-fixed-bottom navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/"><img height="20" alt="Brand" src="img\libro3.png"></a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="about.html">Sobre el proyecto</a>
+            </li>
+            <li>
+              <a id="adescubre" href="descubre.html">Descubrir</a>
+            </li>
+            <li>
+              <a id="alibros" href="mislibros.html">Mis Libros</a>
+            </li>
+			<li>
+				<a id="cerrar" href="/">Cerrar sesión</a>
+			</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+</body></html>
