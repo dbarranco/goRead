@@ -1,0 +1,53 @@
+<html><head><link rel="icon" href="img\favicon\favicon.ico"><meta name="keywords" content="read,golang,book"><meta name="description" content="Read page"><title>goRead - Leer</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="epubjs/build/libs/zip.min.js"></script>
+        <script type="text/javascript" src="epubjs/build/epub.min.js"></script>
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
+    </head><body>
+        <div class="navbar navbar-default navbar-fixed-bottom navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand"><img height="20" alt="Brand" src="img\libro3.png"></a>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#">Mis Libros</a>
+                        </li>
+                        <li>
+                            <a onclick="Book.prevPage();">Anterior</a>
+                        </li>
+                        <li>
+                            <a onclick="Book.nextPage();">Siguiente</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="cover" style="min-height:76%;max-height: 92% ">
+            <div class="cover-image" style="background-image : url('https://unsplash.imgix.net/reserve/xWcqazwvSXadCA7dZLiQ_Ship_mast.jpg?w=1024&amp;q=50&amp;fm=jpg&amp;s=166f668db5471c7f022245f6049e5d12')"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div id="area"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            var Book = ePub("/Biblioteca/libro.epub");
+              Book.renderTo("area");
+        </script>
+    
+
+</body></html>
